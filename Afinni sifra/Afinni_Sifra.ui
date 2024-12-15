@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AfinniSifra</class>
+ <widget class="QMainWindow" name="AfinniSifra">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>300</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(76, 76, 76);</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="ZakodovatButton">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>150</y>
+      <width>100</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(138, 138, 138);
+font: 75 8pt &quot;MS Shell Dlg 2&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Zakódovat</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="DekodovatButton">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>390</y>
+      <width>100</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(138, 138, 138);
+font: 75 8pt &quot;MS Shell Dlg 2&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Dekódovat</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Text_Zakodovani">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>40</y>
+      <width>200</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 16pt &quot;MS Shell Dlg 2&quot;;
+color: rgb(12, 243, 0);</string>
+    </property>
+    <property name="text">
+     <string>Text pro zakódování</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Text_Dekodovani">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>280</y>
+      <width>200</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 16pt &quot;MS Shell Dlg 2&quot;;
+color: rgb(12, 243, 0);</string>
+    </property>
+    <property name="text">
+     <string>Text pro dekódování</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="Vstup_1">
+    <property name="geometry">
+     <rect>
+      <x>48</x>
+      <y>90</y>
+      <width>200</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(239, 239, 239);</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="Vstup_2">
+    <property name="geometry">
+     <rect>
+      <x>48</x>
+      <y>330</y>
+      <width>200</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(239, 239, 239);</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="Vystup_1">
+    <property name="geometry">
+     <rect>
+      <x>48</x>
+      <y>230</y>
+      <width>200</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(239, 239, 239);</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="Vystup_2">
+    <property name="geometry">
+     <rect>
+      <x>48</x>
+      <y>470</y>
+      <width>200</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(239, 239, 239);</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ZakodovanyText">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>180</y>
+      <width>140</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 14pt &quot;MS Shell Dlg 2&quot;;
+color: rgb(12, 243, 0);</string>
+    </property>
+    <property name="text">
+     <string>Zakódovaný text</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="DekodovanyText">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>420</y>
+      <width>140</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 14pt &quot;MS Shell Dlg 2&quot;;
+color: rgb(12, 243, 0);</string>
+    </property>
+    <property name="text">
+     <string>Dekódovaný text</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="klic_a">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>10</y>
+      <width>51</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(239, 239, 239);</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="klic_b">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>10</y>
+      <width>51</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(239, 239, 239);</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="hodnota_a">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>10</y>
+      <width>21</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 12pt &quot;MS Shell Dlg 2&quot;;
+color: rgb(255, 255, 0);</string>
+    </property>
+    <property name="text">
+     <string>a:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="hodnota_b">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>10</y>
+      <width>21</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 12pt &quot;MS Shell Dlg 2&quot;;
+color: rgb(255, 255, 0);</string>
+    </property>
+    <property name="text">
+     <string>b:</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>300</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
