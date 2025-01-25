@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '.\DSA_GUI.ui'
+# Form implementation generated from reading ui file 'DSA_GUI.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.11
 #
@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_DSA(object):
     def setupUi(self, DSA):
         DSA.setObjectName("DSA")
-        DSA.resize(700, 558)
+        DSA.resize(700, 650)
         DSA.setStyleSheet("background-color: rgb(36, 36, 36);")
         self.centralwidget = QtWidgets.QWidget(DSA)
         self.centralwidget.setObjectName("centralwidget")
@@ -59,12 +59,12 @@ class Ui_DSA(object):
 "color: rgb(242, 255, 0);")
         self.label_18.setObjectName("label_18")
         self.nacist_soubor_button = QtWidgets.QPushButton(self.centralwidget)
-        self.nacist_soubor_button.setGeometry(QtCore.QRect(30, 290, 130, 40))
+        self.nacist_soubor_button.setGeometry(QtCore.QRect(30, 300, 130, 40))
         self.nacist_soubor_button.setStyleSheet("color: rgb(255, 255, 255);\n"
 "font: 12pt \"Segoe UI\";")
         self.nacist_soubor_button.setObjectName("nacist_soubor_button")
         self.podepsat_soubor_button = QtWidgets.QPushButton(self.centralwidget)
-        self.podepsat_soubor_button.setGeometry(QtCore.QRect(180, 290, 130, 40))
+        self.podepsat_soubor_button.setGeometry(QtCore.QRect(180, 300, 130, 40))
         self.podepsat_soubor_button.setStyleSheet("color: rgb(255, 255, 255);\n"
 "font: 12pt \"Segoe UI\";")
         self.podepsat_soubor_button.setObjectName("podepsat_soubor_button")
@@ -79,12 +79,12 @@ class Ui_DSA(object):
 "color: rgb(242, 255, 0);")
         self.label_20.setObjectName("label_20")
         self.nacist_zip = QtWidgets.QPushButton(self.centralwidget)
-        self.nacist_zip.setGeometry(QtCore.QRect(370, 290, 130, 40))
+        self.nacist_zip.setGeometry(QtCore.QRect(370, 300, 130, 40))
         self.nacist_zip.setStyleSheet("color: rgb(255, 255, 255);\n"
 "font: 12pt \"Segoe UI\";")
         self.nacist_zip.setObjectName("nacist_zip")
         self.overit = QtWidgets.QPushButton(self.centralwidget)
-        self.overit.setGeometry(QtCore.QRect(520, 290, 130, 40))
+        self.overit.setGeometry(QtCore.QRect(520, 300, 130, 40))
         self.overit.setStyleSheet("color: rgb(255, 255, 255);\n"
 "font: 12pt \"Segoe UI\";")
         self.overit.setObjectName("overit")
@@ -94,57 +94,57 @@ class Ui_DSA(object):
 "color: rgb(242, 255, 0);")
         self.label_21.setObjectName("label_21")
         self.nazev_souboru = QtWidgets.QLineEdit(self.centralwidget)
-        self.nazev_souboru.setGeometry(QtCore.QRect(169, 55, 160, 25))
+        self.nazev_souboru.setGeometry(QtCore.QRect(169, 55, 160, 35))
         self.nazev_souboru.setStyleSheet("color: rgb(255, 255, 255);\n"
 "font: 8pt \"Segoe UI\";")
         self.nazev_souboru.setObjectName("nazev_souboru")
         self.cesta_k_souboru = QtWidgets.QLineEdit(self.centralwidget)
-        self.cesta_k_souboru.setGeometry(QtCore.QRect(170, 105, 160, 25))
+        self.cesta_k_souboru.setGeometry(QtCore.QRect(170, 105, 160, 35))
         self.cesta_k_souboru.setStyleSheet("color: rgb(255, 255, 255);\n"
 "font: 8pt \"Segoe UI\";")
         self.cesta_k_souboru.setObjectName("cesta_k_souboru")
         self.velikost_souboru = QtWidgets.QLineEdit(self.centralwidget)
-        self.velikost_souboru.setGeometry(QtCore.QRect(170, 155, 160, 25))
+        self.velikost_souboru.setGeometry(QtCore.QRect(170, 155, 160, 35))
         self.velikost_souboru.setStyleSheet("color: rgb(255, 255, 255);\n"
 "font: 8pt \"Segoe UI\";")
         self.velikost_souboru.setObjectName("velikost_souboru")
         self.datum_vytvoreni = QtWidgets.QLineEdit(self.centralwidget)
-        self.datum_vytvoreni.setGeometry(QtCore.QRect(170, 205, 160, 25))
+        self.datum_vytvoreni.setGeometry(QtCore.QRect(170, 205, 160, 35))
         self.datum_vytvoreni.setStyleSheet("color: rgb(255, 255, 255);\n"
 "font: 8pt \"Segoe UI\";")
         self.datum_vytvoreni.setObjectName("datum_vytvoreni")
         self.stav_zip_souboru = QtWidgets.QLineEdit(self.centralwidget)
-        self.stav_zip_souboru.setGeometry(QtCore.QRect(500, 55, 160, 25))
+        self.stav_zip_souboru.setGeometry(QtCore.QRect(500, 55, 160, 35))
         self.stav_zip_souboru.setStyleSheet("color: rgb(255, 255, 255);\n"
 "font: 8pt \"Segoe UI\";")
         self.stav_zip_souboru.setObjectName("stav_zip_souboru")
         self.cesta_k_zip_souboru = QtWidgets.QLineEdit(self.centralwidget)
-        self.cesta_k_zip_souboru.setGeometry(QtCore.QRect(500, 105, 160, 25))
+        self.cesta_k_zip_souboru.setGeometry(QtCore.QRect(500, 105, 160, 35))
         self.cesta_k_zip_souboru.setStyleSheet("color: rgb(255, 255, 255);\n"
 "font: 8pt \"Segoe UI\";")
         self.cesta_k_zip_souboru.setObjectName("cesta_k_zip_souboru")
         self.stav_je = QtWidgets.QLineEdit(self.centralwidget)
-        self.stav_je.setGeometry(QtCore.QRect(90, 250, 561, 25))
+        self.stav_je.setGeometry(QtCore.QRect(90, 250, 561, 35))
         self.stav_je.setStyleSheet("color: rgb(255, 255, 255);\n"
 "font: 8pt \"Segoe UI\";")
         self.stav_je.setObjectName("stav_je")
         self.verejny_klic = QtWidgets.QPlainTextEdit(self.centralwidget)
-        self.verejny_klic.setGeometry(QtCore.QRect(30, 390, 281, 61))
+        self.verejny_klic.setGeometry(QtCore.QRect(30, 390, 281, 141))
         self.verejny_klic.setStyleSheet("color: rgb(255, 255, 255);\n"
 "font: 10pt \"Segoe UI\";")
         self.verejny_klic.setObjectName("verejny_klic")
         self.soukromy_klic = QtWidgets.QPlainTextEdit(self.centralwidget)
-        self.soukromy_klic.setGeometry(QtCore.QRect(370, 390, 281, 61))
+        self.soukromy_klic.setGeometry(QtCore.QRect(370, 390, 281, 141))
         self.soukromy_klic.setStyleSheet("color: rgb(255, 255, 255);\n"
 "font: 10pt \"Segoe UI\";")
         self.soukromy_klic.setObjectName("soukromy_klic")
         self.generovat_klice = QtWidgets.QPushButton(self.centralwidget)
-        self.generovat_klice.setGeometry(QtCore.QRect(30, 470, 281, 40))
+        self.generovat_klice.setGeometry(QtCore.QRect(30, 550, 281, 40))
         self.generovat_klice.setStyleSheet("color: rgb(255, 255, 255);\n"
 "font: 12pt \"Segoe UI\";")
         self.generovat_klice.setObjectName("generovat_klice")
         self.nacist_klice = QtWidgets.QPushButton(self.centralwidget)
-        self.nacist_klice.setGeometry(QtCore.QRect(370, 470, 281, 40))
+        self.nacist_klice.setGeometry(QtCore.QRect(370, 550, 281, 40))
         self.nacist_klice.setStyleSheet("color: rgb(255, 255, 255);\n"
 "font: 12pt \"Segoe UI\";")
         self.nacist_klice.setObjectName("nacist_klice")
@@ -154,7 +154,7 @@ class Ui_DSA(object):
 "color: rgb(242, 255, 0);")
         self.label_22.setObjectName("label_22")
         self.nazev_zipu = QtWidgets.QLineEdit(self.centralwidget)
-        self.nazev_zipu.setGeometry(QtCore.QRect(500, 155, 160, 25))
+        self.nazev_zipu.setGeometry(QtCore.QRect(500, 155, 160, 35))
         self.nazev_zipu.setStyleSheet("color: rgb(255, 255, 255);\n"
 "font: 8pt \"Segoe UI\";")
         self.nazev_zipu.setObjectName("nazev_zipu")

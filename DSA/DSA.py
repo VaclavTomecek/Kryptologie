@@ -10,23 +10,6 @@ from PyQt5.QtWidgets import QFileDialog
 from DSA_GUI_ui import Ui_DSA
 
 
-def modular_exponentiation(base, exponent, modulus):
-    # Tato funkce efektivně počítá (base^exponent) % modulus pomocí iterativního algoritmu.
-    print(f"Modular exponentiation: base={base}, exponent={exponent}, modulus={modulus}")
-    if modulus <= 0:
-        raise ValueError("Modulus musí být kladné číslo.")
-
-    result = 1
-
-    while exponent > 0:
-        if exponent % 2 == 1:
-            result = (result * base) % modulus
-        base = (base * base) % modulus
-        exponent //= 2
-
-    return result
-
-
 def fix_base64_padding(b64_string):
     # Opraví zarovnání Base64 řetězce přidáním chybějících znaků =.
     return b64_string + "=" * ((4 - len(b64_string) % 4) % 4)
@@ -56,8 +39,8 @@ class DSAApp(QtWidgets.QMainWindow):
             return
 
         # Generuje veřejný a soukromý klíč pro RSA a ukládá je do souborů.
-        self.p = self.generate_large_prime()
-        self.q = self.generate_large_prime()
+        self.p = self.generate_large_prime(128, 256)
+        self.q = self.generate_large_prime(128, 256)
         self.n = self.p * self.q
         self.phi = (self.p - 1) * (self.q - 1)
         self.e = self.find_public_exponent(self.phi)
@@ -84,20 +67,37 @@ class DSAApp(QtWidgets.QMainWindow):
         self.ui.soukromy_klic.setPlainText(f"d={self.d}, n={self.n}")
         self.ui.stav_je.setText(f"Klíče uloženy do: {directory}")
 
-    def generate_large_prime(self):
-        # Generuje velké prvočíslo.
+    def generate_large_prime(self, min_digits, max_digits):
+        iterations = 5  # Počet iterací pro testování
         while True:
-            candidate = random.randint(10**9, 10**10)
-            if self.is_prime(candidate):
-                print(f"Generované prvočíslo: {candidate}")
+            candidate = self.random_large_number(min_digits, max_digits)
+            if self.is_prime(candidate, iterations):
                 return candidate
 
-    def is_prime(self, n):
-        # Kontroluje, zda je číslo prvočíslo.
-        if n <= 1:
-            return False
-        for i in range(2, int(n**0.5) + 1):
-            if n % i == 0:
+    def random_large_number(self, min_digits, max_digits):
+        return random.randint(10 ** (min_digits - 1), 10 ** max_digits - 1)
+
+    def is_prime(self, number, iterations):
+        # Používá Miller-Rabinův test na určení prvočíselnosti.
+        if number < 2 or number % 2 == 0:
+            return number == 2
+
+            # Rozložení čísla na (n - 1) = d * 2^r
+        r, d = 0, number - 1
+        while d % 2 == 0:
+            r += 1
+            d //= 2
+
+        for _ in range(iterations):
+            a = random.randint(2, number - 2)
+            x = pow(a, d, number)
+            if x == 1 or x == number - 1:
+                continue
+            for _ in range(r - 1):
+                x = pow(x, 2, number)
+                if x == number - 1:
+                    break
+            else:
                 return False
         return True
 
@@ -126,7 +126,6 @@ class DSAApp(QtWidgets.QMainWindow):
 
             file_info = os.stat(file_path)
             file_name = os.path.basename(file_path)
-            file_extension = os.path.splitext(file_path)[1]
             file_size = file_info.st_size  # Velikost v B
             modification_date = datetime.datetime.fromtimestamp(file_info.st_mtime)
 
@@ -158,10 +157,10 @@ class DSAApp(QtWidgets.QMainWindow):
                 return
 
             # Uložení cesty k ZIP souboru
-            self.ui.cesta_k_zip_souboru.setText(zip_path)  # Změněno pro správné pole v GUI
+            self.ui.cesta_k_zip_souboru.setText(zip_path)
             # Uložení názvu ZIP souboru
             zip_name = os.path.basename(zip_path)
-            self.ui.nazev_zipu.setText(zip_name)  # Přidáno pro název ZIP souboru
+            self.ui.nazev_zipu.setText(zip_name)
 
             self.ui.stav_zip_souboru.setText("ZIP soubor byl úspěšně načten.")
             print(f"ZIP soubor načten: {zip_path}")
@@ -194,7 +193,10 @@ class DSAApp(QtWidgets.QMainWindow):
                     self.n = n
                     self.ui.verejny_klic.setPlainText(f"e={e}, n={n}")
 
-            print(f"Klíče načteny: d={self.d}, e={self.e}, n={self.n}")
+            print(f"Klíč d: {self.d}")
+            print(f"Klíč e: {self.e}")
+            print(f"Klíč n: {self.n}\n")
+
             self.ui.stav_je.setText("Klíče načteny.")
         except Exception as e:
             self.ui.stav_je.setText(f"Chyba při načítání klíčů: {str(e)}")
@@ -213,11 +215,12 @@ class DSAApp(QtWidgets.QMainWindow):
                 data = file.read()
 
             # Výpočet hash hodnoty souboru
-            hash_value = int(hashlib.sha3_512(data).hexdigest(), 16)
-            print(f"Hash hodnoty souboru: {hash_value}")
+            hash_value = hashlib.sha3_512(data).digest()
+            hash_hex = hash_value.hex()
+            print(f"Hash souboru: {hash_hex}")
 
             # Vytvoření podpisu pomocí soukromého klíče
-            signature = modular_exponentiation(hash_value, self.d, self.n)
+            signature = pow(int.from_bytes(hash_value, "big"), self.d, self.n)
             print(f"Generovaný podpis: {signature}")
 
             # Uložení podpisu do .sign souboru
@@ -240,11 +243,12 @@ class DSAApp(QtWidgets.QMainWindow):
             # Odstranění dočasného .sign souboru
             os.remove(signature_file)
 
-            print(f"Soubor a podpis uloženy do ZIP: {zip_file_path}")
+            print(f"Soubor a podpis uloženy do ZIP: {zip_file_path}\n")
             self.ui.stav_je.setText(f"Soubor a podpis uloženy do ZIP: {zip_file_path}")
+
         except Exception as e:
             self.ui.stav_je.setText(f"Chyba při podepisování: {str(e)}")
-            print(f"Chyba při podepisování: {str(e)}")
+            print(f"Chyba při podepisování: {str(e)}\n")
 
     def verify_signature(self):
         try:
@@ -262,7 +266,7 @@ class DSAApp(QtWidgets.QMainWindow):
             with zipfile.ZipFile(zip_file_path, 'r') as zip_file:
                 file_list = zip_file.namelist()
 
-            print("Files in ZIP:", file_list)
+            print("Složky v ZIP:", file_list)
 
             # Získání cest k podpisovému a podepsanému souboru
             signature_file = None
@@ -271,14 +275,14 @@ class DSAApp(QtWidgets.QMainWindow):
             for file in file_list:
                 if file.endswith('.sign'):
                     signature_file = file
-                    print(f"Signature file found: {signature_file}")
+                    print(f"Podpisový soubor: {signature_file}")
                 elif not file.startswith('__MACOSX/') and not file.startswith('.') and not file.startswith(
                         '._') and not file.startswith('__'):
                     signed_file = file
-                    print(f"Signed file found: {signed_file}")
+                    print(f"Podepsaný soubor: {signed_file}")
 
             if not signature_file or not signed_file:
-                print("Signature or signed file not found in ZIP.")
+                print("Podpisový soubor nebo dokument nebyl nalezen v ZIP.")
                 self.ui.stav_je.setText("Podpisový soubor nebo dokument nebyl nalezen v ZIP.")
                 return
 
@@ -287,7 +291,7 @@ class DSAApp(QtWidgets.QMainWindow):
                 with zip_file.open(signed_file, 'r') as file:
                     signed_file_data = file.read()
                     hashed_data = hashlib.sha3_512(signed_file_data).digest()
-                    print(f"Computed hash of signed file: {hashed_data.hex()}")
+                    print(f"Hash podepsaného souboru: {hashed_data.hex()}")
 
                 # Načtení obsahu podpisového souboru
                 with zip_file.open(signature_file, 'r') as file:
@@ -295,19 +299,20 @@ class DSAApp(QtWidgets.QMainWindow):
                     signature_content = signature_content.replace("RSA_SHA3-512\n", "")
                     signature_bytes = base64.b64decode(signature_content)
                     signature_int = int.from_bytes(signature_bytes, byteorder='big')
-                    print(f"Decoded signature: {signature_int}")
+                    print(f"Dekódovaný podpis: {signature_int}")
 
             # Dešifrování podpisu pomocí veřejného klíče
             decrypted_hash = pow(signature_int, self.e, self.n)
             decrypted_hash_bytes = decrypted_hash.to_bytes((self.n.bit_length() + 7) // 8, byteorder='big')
-            print(f"Decrypted hash from signature: {decrypted_hash_bytes.hex()}")
+            decrypted_hash_final = decrypted_hash_bytes[-64:]
+            print(f"Dekódovaný hash z podpisu: {decrypted_hash_final.hex()}\n")
 
             # Porovnání hashe
-            if decrypted_hash_bytes == hashed_data:
-                print("Signature is valid.")
+            if decrypted_hash_final == hashed_data:
+                print("Podpis je platný.")
                 self.ui.stav_je.setText("Podpis je platný.")
             else:
-                print("Signature is invalid.")
+                print("Podpis není platný.")
                 self.ui.stav_je.setText("Podpis není platný.")
 
         except zipfile.BadZipFile:
